@@ -1,93 +1,34 @@
 <?php
-	include "Models/userdata.php";
-	include "Models/eventdata.php";
-
+	include("Modules/ViewEventModule.php");
+	include("Modules/MonthlyOverviewModule.php");
+	include("Modules/AddEditEventModule.php");
+		
 	$page = $_GET["page"];
 	$action = $_GET["action"];
-	
-	$template = "";
-	$model = array();
-	
-	// determine user and permissions
-	$user = getCurrentUser();
+
+	global $model;
 	
 	// determine page that is being asked for
 	switch( strtoupper($page) )
 	{
-		case "CALENDAR" :
-			doCalendar();
+		case "MONTHLY_OVERVIEW" :
+			$model = MonthlyOverviewModule::BuildModel();
+			$template = "Views/MonthlyOverviewView.php";
 			break;
 			
-		case "EVENT" :
-			doEvent();
+		case "VIEW_EVENT" :
+			$model = ViewEventModule::BuildModel();
+			$template = "Views/ViewEventView.php";
+			break;
+			
+		case "ADD_EDIT_EVENT" :
+			$model = AddEditEventModule::BuildModel();
+			$template = "Views/AddEditEventView.php";
 			break;
 					
 		default:
-			$template = "Views/notfound.php";
-			
+			$template = "Views/NotFoundView.php";
 	}
 	
 	require_once($template);
-	
-	// determine page actions
-	function doCalendar()
-	{
-		global $template;
-		global $model;
-		global $action;
-		
-		$template = "Views/calendar.php";
-		
-		$monthYear = $_GET["monthyear"];
-		if (empty($monthYear) || $monthYear == "")
-		{
-			$monthYear = date("mY");
-		}
-		
-		$model["monthYear"] = $monthYear;
-		$model["events"] = getEventsForMonth($monthYear);		
-	}
-	
-	function doEvent()
-	{
-		global $template;
-		global $model;
-		global $action;
-		
-		switch( strtoupper($action) )
-		{
-			case "DISPLAY" :
-				$eventId = $_GET["eventid"];
-				$template = "Views/event.php";
-				$model["event"] = getEventById($eventId);
-				break;
-				
-			case "SAVE" :
-				$currentEvent = new Event();
-				$currentEvent->day = $_GET["day"];
-				$currentEvent->month = $_GET["month"];
-				
-				$bResult = saveEvent($currentEvent);
-				
-				if ($bResult)
-				{
-					$template = "Views/calendar.php";
-					$resultMessage = "Event has been saved.";
-				}
-				else
-				{
-					$template = "Views/event.php";
-					$resultMessage = "Failed to save event.";
-				}
-				
-				$model["event"] = $currentEvent;
-				$model["resultMessage"] = $resultMessage;
-				break;
-			
-			case "CANCEL" :
-				$template = "Views/calendar.php";
-				break;
-		}
-	}	
-	
 ?>
