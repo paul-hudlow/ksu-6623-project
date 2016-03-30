@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2016 at 05:32 AM
+-- Generation Time: Mar 30, 2016 at 06:47 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `paid_time_off_hours` int(11) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `type` int(11) NOT NULL,
