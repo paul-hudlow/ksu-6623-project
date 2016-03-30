@@ -1,6 +1,18 @@
 <?php
 	require_once('Connector/DatabaseConnector.php');
 	
+	class Event
+	{
+		public $eventID;
+		public $title;
+		public $description;
+		public $startDate;
+		public $endDate;
+		public $category;
+		public $employee;
+		public $hours;
+	}
+	
 	class EventDataAccessor
 	{
 		static function GetEventsForMonth($monthYear)
@@ -41,14 +53,5 @@
 			
 			return $retVal;
 		}
-	}
-	
-	class Event
-	{
-		public $date;
-		public $title;
-		public $description;
-		public $employee;
-		public $timeSpent;
 	}
 ?>
