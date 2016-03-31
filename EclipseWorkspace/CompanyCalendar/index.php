@@ -13,8 +13,17 @@
 	switch( strtoupper($page) )
 	{
 		case "LOGIN" :
-			$model = LoginModule::BuildModel();
-			$template = "Views/LoginView.php";
+			$loginSuccess = LoginModule::Login();
+			if ($loginSuccess)
+			{
+				header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?page=monthly_overview');
+				die();
+			}
+			else
+			{
+				$model = LoginModule::BuildModel();
+				$template = "Views/LoginView.php";
+			}
 			break;
 			
 		case "MONTHLY_OVERVIEW" :

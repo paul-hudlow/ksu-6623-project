@@ -7,5 +7,10 @@
 			
 			return $model;
 		}
+		
+		static function Login()
+		{
+			return $_GET["action"] == 'login';
+		}
 	}
 ?>
