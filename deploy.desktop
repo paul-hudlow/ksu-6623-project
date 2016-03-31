@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Eclipse
+Comment=Eclipse Integrated Development Environment
+Icon=software-update-available
+Exec=/home/swe6623/Project/deploy.sh
+Terminal=true
+Categories=Development;IDE;Java;
+Path=/home/swe6623/Project
+Comment[en_US]=Deploy project to web server directory.
+Name[en_US]=Deploy Project
+X-KeepTerminal=true
