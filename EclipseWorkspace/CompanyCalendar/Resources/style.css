@@ -12,3 +12,56 @@
     margin: 5px auto;
     text-align: center;
 }
+
+#event_form{
+    margin: 0 auto;
+    width: 50%;
+    text-align: left;
+    position: relative;
+    top: 30px;
+    padding: 10px;
+    -webkit-box-shadow: 3px 3px 7px 2px rgba(192,192,192,1);
+    -moz-box-shadow: 3px 3px 7px 2px rgba(192,192,192,1);
+    box-shadow: 3px 3px 7px 2px rgba(192,192,192,1);
+}
+
+hr, h5{
+    margin: 5px 0px;
+}
+
+#right_side_title{
+    text-align: right;
+    float: right;
+    font-size: 10px;
+}
+
+#right_side_title #delete_box{
+    text-align: center;
+}
+
+#right_side_title #delete_box img{
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+}
+
+#right_side_title #close_window,
+#right_side_title #delete_box{
+    float: right;
+}
+
+#right_side_title #close_window span{
+    border: 1px solid #C0C0C0;
+    background-color: #D3D3D3;
+    padding: 2px;
+    height: 1px;
+    position: relative;
+    top:10px;
+}
+
+#button_div{
+    text-align: right;
+}
+
+#button_div input{
+    background-color: #D3D3D3;
+}
