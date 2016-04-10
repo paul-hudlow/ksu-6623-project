@@ -13,7 +13,7 @@
     text-align: center;
 }
 
-#event_form{
+#event_form, #view_event{
     margin: 0 auto;
     width: 50%;
     text-align: left;
