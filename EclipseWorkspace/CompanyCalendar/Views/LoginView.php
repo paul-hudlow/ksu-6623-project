@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="Resources/normalize.css" />
         <link rel="stylesheet" href="Resources/skeleton.css" />
         <link rel="stylesheet" href="Resources/style.css" />
+        
     </head>
     <body>
         <div id="login_box">

@@ -54,6 +54,14 @@ $model['event_types'] = array(
         <link rel="stylesheet" href="Resources/normalize.css" />
         <link rel="stylesheet" href="Resources/skeleton.css" />
         <link rel="stylesheet" href="Resources/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#right_side_title #close_window').click(function(){
+                    window.location.replace('index.php?page=monthly_overview');
+                });
+            });
+        </script>
     </head>
     
     

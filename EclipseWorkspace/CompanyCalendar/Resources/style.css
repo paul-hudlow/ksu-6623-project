@@ -47,6 +47,7 @@ hr, h5{
 #right_side_title #close_window,
 #right_side_title #delete_box{
     float: right;
+    cursor: pointer;
 }
 
 #right_side_title #close_window span{
