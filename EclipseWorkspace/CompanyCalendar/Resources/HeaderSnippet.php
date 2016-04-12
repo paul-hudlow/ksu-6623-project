@@ -1,0 +1,1 @@
+<div id="logout_box"><a id="logout_link" href="?page=login&action=logout">Logout</a></div>
