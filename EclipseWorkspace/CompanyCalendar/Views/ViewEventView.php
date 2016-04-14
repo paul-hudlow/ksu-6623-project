@@ -1,15 +1,15 @@
 <?php
 
-$model = array();
-$model['event_datae'] = array(
+/*$model = array();
+$model = array(
 	'event_title' => 'Company Bowling Tournament',
 	'event_category' => 'Company Holiday',
 	'event_start_date' => '2016-02-10',
 	'event_end_date' => '2016-02-12',
 	'employee' => 'Durrell Lyons',
-	'event_descritpion' => 'Annual Bowling Retreat To Raise Money For Josea Feed The Hungry',
+	'event_description' => 'Annual Bowling Retreat To Raise Money For Josea Feed The Hungry',
 	'hours_of_work' => 16
-);
+);*/
 
 ?>
 <html>
@@ -55,7 +55,7 @@ $model['event_datae'] = array(
                             </div> <!-- three columns -->
                             
                             <div class="seven columns">
-                                <input type="text" name="event_title" value="<?php echo $model['event_datae']['event_title']; ?>" />
+                                <input type="text" name="event_title" value="<?php echo $model['event_title']; ?>" />
                             </div> <!-- seven columns -->
                         </div> <!-- #event_type_row -->
                         
@@ -65,7 +65,7 @@ $model['event_datae'] = array(
                             </div><!--  .three .columns  -->
                             
                             <div class="seven columns">
-                                <textarea class= "u-full-width" name="event_description" cols=30><?php echo trim($model['event_datae']['event_descritpion']); ?></textarea>
+                                <textarea class= "u-full-width" name="event_description" cols=30><?php echo trim($model['event_description']); ?></textarea>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_description_row  -->
                         
@@ -75,7 +75,7 @@ $model['event_datae'] = array(
                             </div><!--  three columns  -->
                             
                             <div class="seven columns">
-                                <?php echo $model['event_datae']['employee']; ?>
+                                <?php echo $model['employee']; ?>
                             </div><!-- .seven .columns  -->
                         </div><!-- #employee_list_row  -->
                         
@@ -85,7 +85,7 @@ $model['event_datae'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="start_date" value="<?php echo $model['event_datae']['event_start_date']; ?>" />
+                                <input type="date" name="start_date" value="<?php echo $model['event_start_date']; ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_start_date  -->
                         
@@ -95,7 +95,7 @@ $model['event_datae'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="end_date" value="<?php echo $model['event_datae']['event_end_date']; ?>" />
+                                <input type="date" name="end_date" value="<?php echo $model['event_end_date']; ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_end_date  -->
                         
@@ -105,7 +105,7 @@ $model['event_datae'] = array(
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <input type="text" name="event_type" value="<?php echo $model['event_datae']['event_category']; ?> " />
+                                <input type="text" name="event_type" value="<?php echo $model['event_category']; ?> " />
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_category_row -->
                         
@@ -115,7 +115,7 @@ $model['event_datae'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="number" name="hours_of_time" value="<?php echo $model['event_datae']['hours_of_work']; ?>" />
+                                <input type="number" name="hours_of_time" value="<?php echo $model['hours_of_work']; ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                     

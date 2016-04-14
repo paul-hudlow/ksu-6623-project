@@ -65,7 +65,8 @@
 				break;
 				
 			case "VIEW_EVENT" :
-				$model = ViewEventModule::BuildModel();
+				$viewEventModule = new ViewEventModule();
+				$model = $viewEventModule->BuildModel($_GET['event_id']);
 				$template = "Views/ViewEventView.php";
 				break;
 				

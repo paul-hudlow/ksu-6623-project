@@ -1,5 +1,7 @@
 <?php
 	require_once('Connector/DatabaseConnector.php');
+	require_once('UserData.php');
+	require_once('EventCategoryData.php');
 	
 	class Event
 	{
@@ -15,7 +17,16 @@
 	
 	class EventDataAccessor
 	{
-		static function GetEventsForMonth($monthYear)
+		public $userDataAccessor;
+		public $eventCategoryDataAccessor;
+		
+		function __construct()
+		{
+			$this->userDataAccessor = new UserDataAccessor();
+			//$this->eventCategoryDataAccessor = new EventCategoryDataAccessor();
+		}
+		
+		function GetEventsForMonth($monthYear)
 		{
 			$eventArray = array();
 			
@@ -24,7 +35,7 @@
 			return $eventArray;
 		}
 		
-		static function GetEventByDayMonthYear($day, $monthYear)
+		function GetEventByDayMonthYear($day, $monthYear)
 		{
 			$returnEvent = null;
 
@@ -33,19 +44,22 @@
 			return $returnEvent;
 		}
 		
-		static function GetEventById($id)
+		function GetEventById($id)
 		{
 			$database = DatabaseConnector::GetDatabase();
-			$returnEvent = new Event;
-			$data = $database->select("event", "*", array("id" => 0));
+			$returnEvent = new Event();
+			$data = $database->select("event", "*", array("id" => $id));
+			
 			$returnEvent->title = $data[0]["title"];
 			$returnEvent->description = $data[0]["description"];
-			$returnEvent->date = $data[0]["date"];
+			$returnEvent->startDate = $data[0]["start_date"];
+			$returnEvent->endDate = $data[0]["end_date"];
+			$returnEvent->employee = $this->userDataAccessor->GetUserById($data[0]["employee"]);
 			
 			return $returnEvent;
 		}
 		
-		static function SaveEvent($event)
+		function SaveEvent($event)
 		{
 			$retVal = false;
 			

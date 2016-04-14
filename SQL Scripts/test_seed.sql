@@ -20,6 +20,10 @@ SET time_zone = "+00:00";
 -- Database: `CompanyCalendar`
 --
 
+DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `user`;
+
 -- --------------------------------------------------------
 
 --
@@ -27,19 +31,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `color` text NOT NULL,
   `work_time` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `title`, `color`, `work_time`, `active`) VALUES
-(0, 'Birthday', 'FF0000', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -48,16 +45,15 @@ INSERT INTO `category` (`id`, `title`, `color`, `work_time`, `active`) VALUES
 --
 
 CREATE TABLE `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` text NOT NULL,
   `description` text,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `category` int(11) DEFAULT NULL,
-  `employee` varchar(32) NOT NULL,
+  `employee` varchar(32) DEFAULT NULL,
   `work_time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- --------------------------------------------------------
 
 --
@@ -66,7 +62,6 @@ CREATE TABLE `event` (
 
 CREATE TABLE `user` (
   `username` varchar(32) NOT NULL,
-  `password` text NOT NULL,
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
   `role` int(11) NOT NULL,
@@ -111,3 +106,28 @@ ALTER TABLE `event`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `first_name`, `last_name`, `role`, `active`) VALUES
+('johnsmith', 'John', 'Smith', 0, 1);
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `title`, `color`, `work_time`, `active`) VALUES
+(1, 'Birthday', 'FF0000', 0, 1),
+(2, 'Sick Day', '00FF00', 1, 1),
+(3, 'Meeting', '0000FF', 0, 1);
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `title`, `description`, `start_date`, `end_date`, `category`, `employee`, `work_time`) VALUES
+(2, 'Safety Meeting', 'Go out to a bar after work.', '2016-04-07 17:00:00', '2016-04-07 20:00:00', 3, NULL, NULL),
+(3, 'John Out of Office', 'John Smith has a cold.', '2016-04-12 00:00:00', '2016-04-14 00:00:00', 2, 'johnsmith', '16:00:00');
+
