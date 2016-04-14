@@ -13,6 +13,11 @@
     text-align: center;
 }
 
+#logout_box {
+	margin: 5px;
+	float: right;
+}
+
 #event_form, #view_event{
     margin: 0 auto;
     width: 50%;

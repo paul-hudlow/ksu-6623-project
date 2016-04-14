@@ -24,6 +24,8 @@
                         <br>
                             
                         <input type="submit" value="Submit" />
+                        
+                        <p><?php echo $model['error'] ?>
                     </form>
                     
                     <br>

@@ -66,7 +66,8 @@ $model['event_types'] = array(
     
     
     <body>
-       <div id="event_form">
+    	<?php include("Resources/HeaderSnippet.php"); ?>
+        <div id="event_form">
             <div class="row" id="title-row">
                 
                 
