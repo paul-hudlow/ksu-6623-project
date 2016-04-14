@@ -4,8 +4,6 @@
 	require_once("Modules/MonthlyOverviewModule.php");
 	require_once("Modules/AddEditEventModule.php");
 	require_once("Modules/ReportsModule.php");
-	require_once('Modules/ulogin/config/all.inc.php');
-	require_once('Modules/ulogin/main.inc.php');
 
 	$page = $_GET['page'];
 	$action = $_GET['action'];

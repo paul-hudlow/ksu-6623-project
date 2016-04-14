@@ -1,7 +1,9 @@
 <?php
+	require_once('ulogin/config/all.inc.php');
+	require_once('ulogin/main.inc.php');
 	class LoginModule
 	{
-		private $ulogin;
+		public $ulogin;
 		
 		function __construct()
 		{
