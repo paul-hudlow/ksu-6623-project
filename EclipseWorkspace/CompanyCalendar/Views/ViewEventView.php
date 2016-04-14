@@ -65,7 +65,7 @@ $model['event_datae'] = array(
                             </div><!--  .three .columns  -->
                             
                             <div class="seven columns">
-                                <textarea name="event_description" cols=30><?php echo trim($model['event_datae']['event_descritpion']); ?></textarea>
+                                <textarea class= "u-full-width" name="event_description" cols=30><?php echo trim($model['event_datae']['event_descritpion']); ?></textarea>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_description_row  -->
                         

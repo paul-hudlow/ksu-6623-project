@@ -71,3 +71,42 @@ hr, h5{
 #button_div input{
     background-color: #D3D3D3;
 }
+
+#view_calendar #event_type_row .events{
+    text-align: center;
+    margin: 0;
+    width: 10%;
+    border: 1px solid black;
+}
+
+#month_type_row{
+    text-align: center;
+}
+
+.month_cycle{
+    border: 1px solid #000000;
+    background-color:#C0C0C0;
+    cursor: pointer;
+    padding: 0px 1px;
+    margin: 0px 25px;
+}
+
+#calednar_days{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.days{
+    border: 1px solid black;
+    text-align: right;
+    padding: 10px;
+    margin: 0;
+}
+
+#count_down{
+    float: left;
+}
+
+#count_up{
+    float: right;
+}
