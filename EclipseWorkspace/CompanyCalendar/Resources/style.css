@@ -94,8 +94,31 @@ hr, h5{
 .days{
     border: 1px solid black;
     text-align: right;
-    padding: 10px;
+    padding: 0px 3px;
     margin: 0;
+    height: 100px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.numeric_day{
+    float: right;
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    z-index: 200;
+    cursor: pointer;
+}
+
+.events a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.events a:hover{
+    text-decoration: underline;
+    color: blue;
 }
 
 #count_down{
