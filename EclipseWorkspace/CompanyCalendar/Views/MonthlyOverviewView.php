@@ -58,6 +58,59 @@ $model['event_types'] = array(
         
 );
 
+$model['event_list'] = array(
+    array(
+        'id' => 5,
+        'user_id' => 5, 
+        'paid_time_off_hours' => 16,
+        'start_date' =>'04-12-2016',
+        'end_date' =>'04-14-2016',
+        'type' => 5,
+        'description' => 'Vacation Time',
+        'title' => 'Vacation' ,
+    ),
+    array(
+        'id' => 10,
+        'user_id' => 6, 
+        'paid_time_off_hours' => 8,
+        'start_date' =>'04-12-2016',
+        'end_date' =>'04-14-2016',
+        'type' => 3,
+        'description' => 'Vacation Time',
+        'title' => 'Vacation' ,
+    ),
+    array(
+        'id' => 15,
+        'user_id' => 7, 
+        'paid_time_off_hours' => 32,
+        'start_date' =>'04-12-2016',
+        'end_date' =>'04-14-2016',
+        'type' => 4,
+        'description' => 'Vacation Time',
+        'title' => 'Vacation' ,
+    ),
+    array(
+        'id' => 20,
+        'user_id' => 8, 
+        'paid_time_off_hours' => 24,
+        'start_date' =>'04-12-2016',
+        'end_date' =>'04-14-2016',
+        'type' => 7,
+        'description' => 'Vacation Time',
+        'title' => 'Vacation' ,
+    ),
+    array(
+        'id' => 25,
+        'user_id' => 9, 
+        'paid_time_off_hours' => 8,
+        'start_date' =>'04-12-2016',
+        'end_date' =>'04-14-2016',
+        'type' => 2,
+        'description' => 'Vacation Time',
+        'title' => 'Vacation' ,
+    )
+);
+
 if(!@$_GET['month']){
     $current_number_month = date('m');
     $current_Text_Month = date('F');
@@ -68,8 +121,8 @@ else {
 }
 $current_number_year = date('Y');
 $days = cal_days_in_month(CAL_GREGORIAN, $current_number_month, (int)$current_number_year );
-
-//echo "There was $days days in " . $current_Text_Month . " 2016";
+$today = date('d');
+$current_month = date('m');
 
 ?>
 <html>
@@ -135,8 +188,14 @@ $days = cal_days_in_month(CAL_GREGORIAN, $current_number_month, (int)$current_nu
                     
                     <div class="row">
                     <?php for($i=1; $i <= $days; $i++) { ?>
-                        <div class="two columns days">
+                        <?php if( $today == $i && $current_number_month == $current_month) { ?>
+                            <div class="two columns days" style="border:1px solid red;">
+                        <?php } else { ?>
+                            <div class="two columns days">
+                        <?php } ?>
                             <?php echo $i; ?>
+                            <?php //foreach($model['event_list'] as $events){ ?>
+                            <?php //} ?>
                         </div>
                         <?php if($i%7==0){ ?>
                         </div>
