@@ -61,8 +61,7 @@ $model['event_types'] = array(
 $model['event_list'] = array(
     array(
         'id' => 5,
-        'user_id' => 5, 
-        'paid_time_off_hours' => 16,
+        'user_id' => 5,
         'start_date' =>'2016-03-10',
         'end_date' =>'2016-03-15',
         'type' => 5,
@@ -73,7 +72,6 @@ $model['event_list'] = array(
     array(
         'id' => 10,
         'user_id' => 6, 
-        'paid_time_off_hours' => 8,
         'start_date' =>'2016-05-11',
         'end_date' =>'2016-05-15',
         'type' => 3,
@@ -84,7 +82,6 @@ $model['event_list'] = array(
     array(
         'id' => 15,
         'user_id' => 7, 
-        'paid_time_off_hours' => 32,
         'start_date' =>'2016-04-12',
         'end_date' =>'2016-04-14',
         'type' => 4,
@@ -95,7 +92,6 @@ $model['event_list'] = array(
     array(
         'id' => 20,
         'user_id' => 8, 
-        'paid_time_off_hours' => 24,
         'start_date' =>'2016-04-12',
         'end_date' =>'2016-04-14',
         'type' => 7,
@@ -105,8 +101,7 @@ $model['event_list'] = array(
     ),
     array(
         'id' => 25,
-        'user_id' => 9, 
-        'paid_time_off_hours' => 8,
+        'user_id' => 9,
         'start_date' =>'2016-04-02',
         'end_date' =>'2016-04-05',
         'type' => 2,
@@ -175,7 +170,6 @@ $current_month = date('m');
 	<div id="view_calendar">
             
             <div class="row" id="event_type_row">
-                <div class="two columns events" > Show All </div>
                 <?php foreach($model['event_types'] as $event) { ?>
                 <div class="two columns events" style="background-color:<?php echo $event['color']; ?>" id="event_id_<?php echo $event['id']; ?>">
                     <?php echo $event['types']; ?>
