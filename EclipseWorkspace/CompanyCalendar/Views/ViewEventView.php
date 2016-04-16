@@ -1,17 +1,3 @@
-<?php
-
-/*$model = array();
-$model = array(
-	'event_title' => 'Company Bowling Tournament',
-	'event_category' => 'Company Holiday',
-	'event_start_date' => '2016-02-10',
-	'event_end_date' => '2016-02-12',
-	'employee' => 'Durrell Lyons',
-	'event_description' => 'Annual Bowling Retreat To Raise Money For Josea Feed The Hungry',
-	'hours_of_work' => 16
-);*/
-
-?>
 <html>
     <head>
         <link rel="stylesheet" href="Resources/normalize.css" />
@@ -115,7 +101,7 @@ $model = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="number" name="hours_of_time" value="<?php echo $model['hours_of_work']; ?>" />
+                                <input type="number" name="hours_of_time" value="<?php echo $model['work_time']; ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                     

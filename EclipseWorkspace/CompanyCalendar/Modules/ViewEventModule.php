@@ -17,7 +17,9 @@
 			$model["event_description"] = $eventObject->description;
 			$model["event_start_date"] = $eventObject->startDate;
 			$model["event_end_date"] = $eventObject->endDate;
+			$model["event_category"] = $eventObject->category->title;
 			$model["employee"] = $eventObject->employee->firstName . ' ' . $eventObject->employee->lastName;
+			$model["work_time"] = $eventObject->workTime;
 			
 			return $model;
 		}

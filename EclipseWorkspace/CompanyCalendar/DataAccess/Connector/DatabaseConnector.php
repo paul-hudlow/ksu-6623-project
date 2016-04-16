@@ -7,9 +7,9 @@
 		
 		static function GetDatabase()
 		{
-			if ($database == NULL)
+			if (self::$database == NULL)
 			{
-				$database = new medoo(array(
+				self::$database = new medoo(array(
 				    'database_type' => 'mysql',
 				    'database_name' => 'CompanyCalendar',
 				    'server' => 'localhost',
@@ -18,7 +18,7 @@
 				    'charset' => 'utf8'
 				));
 			}
-			return $database;
+			return self::$database;
 		}
 	}
 ?>
