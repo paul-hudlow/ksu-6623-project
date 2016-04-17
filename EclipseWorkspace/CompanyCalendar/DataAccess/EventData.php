@@ -5,7 +5,7 @@
 	
 	class Event
 	{
-		public $id;
+		public $eventId;
 		public $title;
 		public $description;
 		public $startDate;
@@ -98,7 +98,7 @@
 		}
 		
 		function GetEventById($id)
-		{
+		{	
 			$data = $this->database->select("event", "*", array("id" => $id));
 			
 			return $this->MapEventFromData($data[0]);
@@ -121,6 +121,7 @@
 		{
 			$returnEvent = new Event();
 			
+			$returnEvent->eventId = $data['id'];
 			$returnEvent->title = $data["title"];
 			$returnEvent->description = $data["description"];
 			$returnEvent->startDate = new DateTime($data["start_date"]);
@@ -132,7 +133,10 @@
 				$returnEvent->workTime = $baseDateTime->diff($workDateTime);
 			}
 			$returnEvent->category = $this->eventCategoryDataAccessor->GetEventCategoryById($data["category"]);
-			$returnEvent->employee = $this->userDataAccessor->GetUserById($data["employee"]);
+			if (!($data["employee"] == null || $data["employee"] == ""))
+			{
+				$returnEvent->employee = $this->userDataAccessor->GetUserById($data["employee"]);
+			}
 			
 			return $returnEvent;
 		}

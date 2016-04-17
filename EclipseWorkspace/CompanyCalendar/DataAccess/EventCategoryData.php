@@ -30,5 +30,26 @@
 			
 			return $returnCategory;
 		}
+		
+		function GetAllCategories()
+		{
+			$allCategories = array();
+			
+			$data = $this->database->select("category", "*");
+			
+			foreach($data as $row)
+			{
+				$curCat = new EventCategory();
+				
+				$curCat->id				= $row["id"];
+				$curCat->colorCode		= $row["color"];
+				$curCat->includeHours	= "";
+				$curCat->title			= $row["title"];
+				
+				$allCategories[] = $curCat;
+			}
+			
+			return $allCategories;
+		}
 	}
 ?>

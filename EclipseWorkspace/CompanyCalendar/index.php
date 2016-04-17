@@ -6,7 +6,11 @@
 	require_once("Modules/ReportsModule.php");
 
 	$page = $_GET['page'];
-	$action = $_GET['action'];
+	$action = "";
+	if (isset($_GET['action']))
+	{
+		$action = $_GET['action'];
+	}
 
 	global $model;
 	
@@ -72,8 +76,55 @@
 				break;
 				
 			case "ADD_EDIT_EVENT" :
-				$model = AddEditEventModule::BuildModel();
-				$template = "Views/AddEditEventView.php";
+				//case 1: display the blank template in anticipation of creating a new event
+				//case 2: display existing event
+				//case 3: save an event then display the month overview the event was saved on
+				//case 4: cancel event edit, so display the month overview
+				//case 5: delete the given event
+				
+				$eventModel = new AddEditEventModule();
+
+				if (strtoupper($action) == "")
+				{
+					error_log("ADD_EDIT_EVENT: display");
+					
+					if(isset($_GET["eventid"]))
+					{
+						//case 2
+						$model = $eventModel->BuildModel($_GET["year"], $_GET["month"], NULL, $_GET["eventid"]);
+					}
+					else 
+					{
+						//case 1
+						$model = $eventModel->BuildModel($_GET["year"], $_GET["month"], $_GET["day"]);
+					}
+					
+					$template = "Views/AddEditEventView.php";
+				}
+				else
+				{
+					error_log("ADD_EDIT_EVENT: " . $action);
+					
+					if (strtoupper($action) == "SAVE")
+					{
+						//case 3
+						$eventModel->SaveEvent();
+					}
+					else if (strtoupper($action) == "CANCEL")
+					{
+						//case 4
+					}
+					else if (strtoupper($action) == "DELETE")
+					{
+						//case 5
+					}
+						
+					// always return to the overview
+					$monthlyOverviewModule = new MonthlyOverViewModule();
+					$model = $monthlyOverviewModule->BuildModel($_GET['month'], $_GET['year']);
+					$template = "Views/MonthlyOverviewView.php";
+				}				
+				
 				break;
 				
 			case "REPORTS" :

@@ -30,5 +30,26 @@
 			
 			return $returnUser;
 		}
+		
+		function GetAllUsers()
+		{
+			$allUsers = array();
+			
+			$data = $this->database->select("user", "*");
+			
+			foreach($data as $row)
+			{
+				$curUser = new User();
+				
+				$curUser->userName = $row["username"];
+				$curUser->firstName = $row["first_name"];
+				$curUser->lastName = $row["last_name"];
+				$curUser->isHR = $row["role"];
+				
+				$allUsers[] = $curUser;
+			}
+			
+			return $allUsers;
+		}
 	}
 ?>
