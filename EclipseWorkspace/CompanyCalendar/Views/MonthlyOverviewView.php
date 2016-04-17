@@ -126,6 +126,8 @@ $days = cal_days_in_month(CAL_GREGORIAN, $current_number_month, (int)$current_nu
 $today = date('d');
 $current_month = date('m');
 
+$addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $current_number_year;
+
 ?>
 <html>
     <head>
@@ -140,7 +142,7 @@ $current_month = date('m');
                 
                 function calendar_transition(){
                     var current_month_value = $("#month_type_row h3").attr("id");
-                    var url = "http://localhost/ClassCalendar/EclipseWorkspace/CompanyCalendar/index.php?page=monthly_overview";
+                    var url = "index.php?page=monthly_overview";
                     $("#count_down").click(function(){
                         if(current_month_value > 1){
                             current_month_value--;
@@ -202,10 +204,21 @@ $current_month = date('m');
                     	<tr>
                     		<?php for ($day = 0; $day < 7; $day++) { ?>
                     		<td>
-                    			<div class="dayLabel"><?php echo($model['days'][$week][$day]->dayOfMonth); ?></div>
+                    			<div class="dayLabel">
+                    			<?php 
+                    				if ($model['days'][$week][$day]->dayOfMonth != '')
+                    				{
+                    				    echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
+                    				    echo("&day=" . $model['days'][$week][$day]->dayOfMonth . "\">"); 
+                    				    echo($model['days'][$week][$day]->dayOfMonth . "</a>");
+                    				}
+                    			?>
+                    			</div>
                     			<ul class="taskList">
                     				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
-                    				<li><?php echo($event->title); ?></li>
+                    				<li><?php echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
+                    				          echo("&eventid=" . $event->eventId . "\" >");
+                    				          echo($event->title . "</a>"); ?></li>
                     				<?php } ?>
                     			</ul>
                     		</td>
