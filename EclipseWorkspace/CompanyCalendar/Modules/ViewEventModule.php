@@ -1,5 +1,5 @@
 <?php
-	include("DataAccess/EventData.php");
+	require_once("DataAccess/EventData.php");
 	class ViewEventModule
 	{
 		public $eventDataAccessor;

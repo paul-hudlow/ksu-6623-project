@@ -59,10 +59,6 @@ hr, h5{
     top:10px;
 }
 
-#button_div{
-    text-align: right;
-}
-
 #button_div input{
     background-color: #D3D3D3;
 }
@@ -148,4 +144,8 @@ hr, h5{
     height: 100%;
     font-size: 24px;
     padding: 3px 0;
+}
+
+tr.summary {
+	font-weight: bold;
 }

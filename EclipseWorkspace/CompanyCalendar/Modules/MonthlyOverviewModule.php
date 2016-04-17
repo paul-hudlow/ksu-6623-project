@@ -1,4 +1,5 @@
 <?php
+	require_once("DataAccess/EventData.php");
 	class Day
 	{
 		public $eventList;
@@ -14,6 +15,7 @@
 	class MonthlyOverviewModule
 	{
 		public $eventDataAccessor;
+		
 		function __construct()
 		{
 			$this->eventDataAccessor = new EventDataAccessor();

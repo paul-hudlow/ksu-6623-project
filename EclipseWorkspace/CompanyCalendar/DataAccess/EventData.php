@@ -5,7 +5,7 @@
 	
 	class Event
 	{
-		public $eventID;
+		public $id;
 		public $title;
 		public $description;
 		public $startDate;
@@ -53,27 +53,27 @@
 			$totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 			$monthEndString = $year . '-' . $month . '-' . $totalDays . ' 23:59:59';
 			
-			return GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
 		}
 		
-		function GetEventsForMonth($year, $categoryId, $employeeId)
-		{			
+		function GetEventsForYear($year, $categoryId, $employeeId)
+		{		
  			$yearStartString = $year . '-1-1' . ' 00:00:00';
-			$yearEndString = $year . '-12-31' . '23:59:59';
+			$yearEndString = $year . '-12-31' . ' 23:59:59';
 			
-			return GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
 		}
 		
 		function GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId)
 		{
 			$whereClause = array("start_date[>=]" => $yearStartString, "start_date[<=]" => $yearEndString);
 			
-			if ($categoryId != NULL)
+			if ($categoryId != '')
 			{
 				$whereClause['category'] = $categoryId;
 			}
 			
-			if ($employeeId != NULL)
+			if ($employeeId != '')
 			{
 				$whereClause['employee'] = $employeeId;
 			}
@@ -123,9 +123,14 @@
 			
 			$returnEvent->title = $data["title"];
 			$returnEvent->description = $data["description"];
-			$returnEvent->startDate = $data["start_date"];
+			$returnEvent->startDate = new DateTime($data["start_date"]);
 			$returnEvent->endDate = new DateTime($data["end_date"]);
-			$returnEvent->workTime = new DateTime($data["work_time"]);
+			if (isset($data["work_time"]))
+			{
+				$baseDateTime = new DateTime('00:00:00');
+				$workDateTime = new DateTime($data["work_time"]);
+				$returnEvent->workTime = $baseDateTime->diff($workDateTime);
+			}
 			$returnEvent->category = $this->eventCategoryDataAccessor->GetEventCategoryById($data["category"]);
 			$returnEvent->employee = $this->userDataAccessor->GetUserById($data["employee"]);
 			
