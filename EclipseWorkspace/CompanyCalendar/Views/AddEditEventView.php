@@ -1,55 +1,10 @@
-<?php
-
-$model = array();
-$model['Users'] = array(
-    array(
-        'id' => 5,
-        'firstname' => 'Durrell',
-        'lastname' => 'Lyons'
-    ),
-    array(
-        'id' => 10,
-        'firstname' => 'Paul',
-        'lastname' => 'Hudlow'
-    ),
-    array(
-        'id' => 15,
-        'firstname' => 'Ilyas',
-        'lastname' => 'Kure'
-    ),
-    array(
-        'id' => 20,
-        'firstname' => 'Josh',
-        'lastname' => 'Nunez'
-    )
-);
-
-$model['event_types'] = array(
-    array(
-        'id' => 1,
-        'types' => 'Employee Birthday'
-    ),
-        array(
-        'id' => 2,
-        'types' => 'Sick Days'
-    ),
-            array(
-        'id' => 3,
-        'types' => 'Vacation'
-    ),
-                array(
-        'id' => 4,
-        'types' => 'Company Holiday'
-    ),
-                    array(
-        'id' => 5,
-        'types' => 'Company Event'
-    ),
-);
-
-?>
-
 <html>
+<!-- 
+<?php
+echo(var_export($model, true));
+	$actionURL = "index.php?page=ADD_EDIT_EVENT&year=" . $model["year"] . "&month=" . $model["month"];
+?>
+ -->
     <head>
         <link rel="stylesheet" href="Resources/normalize.css" />
         <link rel="stylesheet" href="Resources/skeleton.css" />
@@ -58,7 +13,7 @@ $model['event_types'] = array(
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#right_side_title #close_window').click(function(){
-                    window.location.replace('index.php?page=monthly_overview');
+                    window.location.replace('index.php?page=monthly_overview<?php echo("&year=" . $model['year'] . "&month=" . $model['month'])?>');
                 });
             });
         </script>
@@ -82,7 +37,7 @@ $model['event_types'] = array(
                         <span>x</span>
                     </div><!-- #close_window-->
                     
-                    <div class="four columns" id="delete_box">
+                    <div class="four columns" id="delete_box" onClick="document.getElementById('action').value='delete'; document.getElementById('eventForm').submit();" >
                         <font>Delete this event</font>
                         <img src="Resources/images/delete_button.png" width="25px" />
                     </div><!-- #delte_box  -->
@@ -97,8 +52,7 @@ $model['event_types'] = array(
             <div class="row" id="form_row">
                 <div class="u-full-width">
                     
-                    
-                    <form action="event_submit.php" method="post">
+                    <form id="eventForm" action="<?php echo($actionURL) ?>" method="get" >
                         
                         <div class="row" id="event_type_row">                            
                             <div class="three columns">
@@ -106,7 +60,7 @@ $model['event_types'] = array(
                             </div> <!-- three columns -->
                             
                             <div class="seven columns">
-                                <input type="text" name="event_title" placeholder="Event Title" />
+                                <input type="text" name="event_title" placeholder="Event Title" value="<?php echo($model["Event"]->title) ?>"/>
                             </div> <!-- seven columns -->
                         </div> <!-- #event_type_row -->
                         
@@ -116,7 +70,7 @@ $model['event_types'] = array(
                             </div><!--  .three .columns  -->
                             
                             <div class="seven columns">
-                                <textarea class="u-full-width" name="event_description" cols=30></textarea>
+                                <textarea class="u-full-width" name="event_description" cols=30><?php echo($model["Event"]->description) ?></textarea>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_description_row  -->
                         
@@ -129,9 +83,9 @@ $model['event_types'] = array(
                                 <select name="employee">
                                     <option>Employee</option>
                                     <?php $users = $model['Users']; ?>
-                                    <?php foreach($users as $user){ ?>
-                                    <option value="<?php echo $user['id']; ?>">
-                                        <?php echo $user['firstname']; ?> &nbsp; <?php echo $user['lastname']; ?>
+                                    <?php foreach($users as $user){ echo("<!-- " . $user->userName . " = " . $model['Event']->employee->userName . " -->")?>
+                                    <option value="<?php echo $user->userName;?>" <?php echo(($user->userName==$model['Event']->employee->userName?"SELECTED":""))?> >
+                                        <?php echo $user->firstName; ?> &nbsp; <?php echo $user->lastName; ?>
                                     </option>
                                     <?php } ?>
                                 </select>
@@ -144,7 +98,7 @@ $model['event_types'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="start_date" />
+                                <input type="date" name="start_date" value="<?php echo((new DateTime($model["Event"]->startDate))->format("Y-m-d")) ?>"/>
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_start_date  -->
                         
@@ -154,7 +108,7 @@ $model['event_types'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="end_date" />
+                                <input type="date" name="end_date" value="<?php echo((new DateTime($model["Event"]->endDate))->format("Y-m-d")) ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_end_date  -->
                         
@@ -164,12 +118,12 @@ $model['event_types'] = array(
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <select name="event_type">
+                                <select name="category">
                                     <option>Event</option>
-                                    <?php $event_types = $model['event_types']; ?>
-                                    <?php foreach($event_types as $type){ ?>
-                                    <option value="<?php echo $type['id']; ?>">
-                                        <?php echo $type['types']; ?>
+                                    <?php $categories = $model['Categories']; ?>
+                                    <?php foreach($categories as $category){ echo("<!-- " . $category->id . " = " . $model['Event']->category->id . " -->") ?>
+                                    <option value="<?php echo $category->id; ?>" <?php echo(($category->id==$model['Event']->category->id?"SELECTED":"")) ?> >
+                                        <?php echo $category->title; ?>
                                     </option>
                                     <?php } ?>
                                 </select>
@@ -182,14 +136,20 @@ $model['event_types'] = array(
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="number" name="hours_of_time" />
+                                <input type="number" name="hours_of_time" value="<?php echo($model["Event"]->workTime) ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                         
+                        <input type="hidden" name="eventid" value="<?php echo($model['Event']->eventId) ?>" />
+                        <input type="hidden" id="action" name="action" />
+                        <input type="hidden" name="page" value="ADD_EDIT_EVENT" />
+                        <input type="hidden" name="year" value="<?php echo($model['year'])?>" />
+                        <input type="hidden" name="month" value="<?php echo($model['month'])?>"/>
+                        
                         <div class="row" id="button_row">
                             <div class="u-full-width" id="button_div">
-                                <input type="submit" value="Save" />
-                                <input type="reset" value="Cancel" />
+                                <input type="submit" value="Save" onClick="document.getElementById('action').value='Save';" />
+                                <input type="reset" value="Cancel" onClick="document.getElementById('action').value='Cancel';" />
                             </div>
                         </div><!--  #button_row  -->
                         
