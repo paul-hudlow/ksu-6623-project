@@ -80,6 +80,11 @@
 				$model = ReportsModule::BuildModel();
 				$template = "Views/ReportsView.php";
 				break;
+			
+			case "REPORT_SUMMARY" :
+				$model = ReportsModule::BuildModel();
+				$template = "Views/ReportSummary.php";
+				break;
 				
 			default:
 				$template = "Views/NotFoundView.php";
