@@ -121,9 +121,9 @@ INSERT INTO `user` (`username`, `first_name`, `last_name`, `role`, `active`) VAL
 --
 
 INSERT INTO `category` (`id`, `title`, `color`, `work_time`, `active`) VALUES
-(1, 'Birthday', 'FF0000', 0, 1),
-(2, 'Sick Day', '00FF00', 1, 1),
-(3, 'Meeting', '0000FF', 0, 1);
+(1, 'Birthday', 'FF9999', 0, 1),
+(2, 'Sick Day', '99FF99', 1, 1),
+(3, 'Meeting', '9999FF', 0, 1);
 
 --
 -- Dumping data for table `event`
@@ -132,6 +132,6 @@ INSERT INTO `category` (`id`, `title`, `color`, `work_time`, `active`) VALUES
 INSERT INTO `event` (`id`, `title`, `description`, `start_date`, `end_date`, `category`, `employee`, `work_time`) VALUES
 (1, 'Safety Meeting', 'Go out to a bar after work.', '2016-04-07 17:00:00', '2016-04-07 20:00:00', 3, NULL, NULL),
 (2, 'John Out of Office', 'John Smith has a cold.', '2016-04-12 00:00:00', '2016-04-14 00:00:00', 2, 'johnsmith', '16:00:00'),
-(3, 'Bob\'s Birthday', 'Happy birthday, Bobby!', '2016-04-13 00:00:00', '2016-04-13 59:59:59', 1, 'bobparr', NULL),
-(4, 'Training Seminar', 'John Smith has a cold.', '2016-04-10 00:00:00', '2016-04-13 00:00:00', 2, NULL, NULL);
+(3, 'Bob\'s Birthday', 'Happy birthday, Bobby!', '2016-04-13 00:00:00', '2016-04-13 23:59:59', 1, 'bobparr', NULL),
+(4, 'Training Seminar', 'John Smith has a cold.', '2016-04-10 00:00:00', '2016-04-13 00:00:00', 3, NULL, NULL);
 

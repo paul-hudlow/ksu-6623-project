@@ -168,6 +168,7 @@ $current_month = date('m');
     
     
     <body>
+    <?php include("Resources/HeaderSnippet.php"); ?>
 	<div id="view_calendar">
             
             <div class="row" id="event_type_row">
@@ -205,7 +206,7 @@ $current_month = date('m');
                     			<div class="dayLabel"><?php echo($model['days'][$week][$day]->dayOfMonth); ?></div>
                     			<ul class="taskList">
                     				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
-                    				<li><?php echo($event->title); ?></li>
+                    				<li style="background-color: <?php echo($event->category->color) ?>"><?php echo($event->title); ?></li>
                     				<?php } ?>
                     			</ul>
                     		</td>
