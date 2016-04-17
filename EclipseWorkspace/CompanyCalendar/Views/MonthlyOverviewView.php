@@ -132,6 +132,7 @@ $current_month = date('m');
         <link rel="stylesheet" href="Resources/normalize.css" />
         <link rel="stylesheet" href="Resources/skeleton.css" />
         <link rel="stylesheet" href="Resources/style.css" />
+        <link rel="stylesheet" href="Resources/monthly_overview.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -188,11 +189,25 @@ $current_month = date('m');
             <div class="row" id="calednar_days">
                 <div class="u-full_width">
                     <table>
+                    	<tr>
+                    		<th>Sunday</th>
+                    		<th>Monday</th>
+                    		<th>Tuesday</th>
+                    		<th>Wednesday</th>
+                    		<th>Thursday</th>
+                    		<th>Friday</th>
+                    		<th>Saturday</th>
+                    	</tr>
                     	<?php for ($week = 0; $week < 6; $week++) { ?>
                     	<tr>
                     		<?php for ($day = 0; $day < 7; $day++) { ?>
                     		<td>
-                    			<?php echo($model['days'][$week][$day]->dayOfMonth) ?>
+                    			<div class="dayLabel"><?php echo($model['days'][$week][$day]->dayOfMonth); ?></div>
+                    			<ul class="taskList">
+                    				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
+                    				<li><?php echo($event->title); ?></li>
+                    				<?php } ?>
+                    			</ul>
                     		</td>
                     		<?php } ?>
                     	</tr>
