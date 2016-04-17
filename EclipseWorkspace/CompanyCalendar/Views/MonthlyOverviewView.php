@@ -1,6 +1,6 @@
 <?php
 
-$model = array();
+/*$model = array();
 $model['event_types'] = array(
         array(
             'id' => 1,
@@ -109,7 +109,7 @@ $model['event_list'] = array(
         'title' => 'Anniversary' ,
         'color' => '#004d99'
     )
-);
+);*/
 
 $number_of_events = sizeof($model['event_list']);
 
@@ -187,44 +187,17 @@ $current_month = date('m');
             
             <div class="row" id="calednar_days">
                 <div class="u-full_width">
-                    
-                    <div class="row">
-                    <?php for($i=1; $i <= $days; $i++) { ?>
-                        <?php if( $today == $i && $current_number_month == $current_month) { ?>
-                            <div class="two columns days" style="border:5px solid red;" id="day_<?php echo $i; ?>">
-                        <?php } else { ?>
-                            <div class="two columns days" id="day_<?php echo $i; ?>" >
-                        <?php } ?>
-                            <a href="http://localhost/ClassCalendar/EclipseWorkspace/CompanyCalendar/index.php?page=ADD_EDIT_EVENT"><span class='numeric_day'> <?php echo $i; ?> </span></a>
-                            <?php for($j=0; $j<$number_of_events; $j++){ ?>
-                                <?php
-                                    $event_start_date = date_create($model['event_list'][$j]['start_date']);
-                                    $event_start_day = date_format($event_start_date, "d");
-                                    $event_start_month = date_format($event_start_date, "m");
-                                    
-                                    $event_end_date = date_create($model['event_list'][$j]['end_date']);
-                                    $event_end_day = date_format($event_end_date, "d");
-                                    $event_end_month = date_format($event_end_date, "m");
-                                    
-                                    //if($event_start_day == $i){
-                                    if($event_start_day <= $i && $current_number_month == $event_start_month && $event_end_day >= $i && $current_number_month == $event_end_month ){
-                                ?>
-                                
-                                <div class="row">
-                                    <div class="u-full-width events" style="background-color:<?php echo $model['event_list'][$j]['color']; ?>" >
-                                        <a href="http://localhost/ClassCalendar/EclipseWorkspace/CompanyCalendar/index.php?page=VIEW_EVENT"><?php echo $model['event_list'][$j]['description']; ?></a>
-                                    </div>
-                                </div>
-                                
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
-                        <?php if($i%7==0){ ?>
-                        </div>
-                        <div class="row">
-                        <?php } ?>
-                    <?php } ?>
-                    </div>
+                    <table>
+                    	<?php for ($week = 0; $week < 6; $week++) { ?>
+                    	<tr>
+                    		<?php for ($day = 0; $day < 7; $day++) { ?>
+                    		<td>
+                    			<?php echo($model['days'][$week][$day]->dayOfMonth) ?>
+                    		</td>
+                    		<?php } ?>
+                    	</tr>
+                    	<?php } ?>
+                    </table>
                 </div>
             </div>
             

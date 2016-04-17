@@ -61,7 +61,7 @@
                             </div><!--  three columns  -->
                             
                             <div class="seven columns">
-                                <?php echo $model['employee']; ?>
+                                <span><?php echo $model['employee']; ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!-- #employee_list_row  -->
                         
@@ -71,7 +71,7 @@
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="start_date" value="<?php echo $model['event_start_date']; ?>" />
+                                <span><?php echo $model['event_start_date']; ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_start_date  -->
                         
@@ -81,7 +81,7 @@
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="end_date" value="<?php echo $model['event_end_date']; ?>" />
+                                <span><?php echo $model['event_end_date']; ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_end_date  -->
                         
@@ -91,17 +91,17 @@
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <input type="text" name="event_type" value="<?php echo $model['event_category']; ?> " />
+                                <span><?php echo $model['event_category']; ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_category_row -->
                         
                         <div class="row" id="hours_of_time">
                             <div class="three columns">
-                                <b>Hours of work time:</b>
+                                <b>Work Time:</b>
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="number" name="hours_of_time" value="<?php echo $model['work_time']; ?>" />
+                                <span><?php echo $model['work_time']; ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                     
