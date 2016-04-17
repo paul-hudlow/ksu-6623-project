@@ -60,7 +60,8 @@
 		switch( strtoupper($page) )
 		{
 			case "MONTHLY_OVERVIEW" :
-				$model = MonthlyOverviewModule::BuildModel();
+				$monthlyOverviewModule = new MonthlyOverViewModule();
+				$model = $monthlyOverviewModule->BuildModel($_GET['month'], $_GET['year']);
 				$template = "Views/MonthlyOverviewView.php";
 				break;
 				

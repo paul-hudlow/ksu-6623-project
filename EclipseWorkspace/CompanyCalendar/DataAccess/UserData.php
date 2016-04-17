@@ -11,11 +11,17 @@
 	
 	class UserDataAccessor
 	{
+		private $database;
+		
+		function __construct()
+		{
+			$this->database = DatabaseConnector::GetDatabase();
+		}
+		
 		function GetUserById($userId)
 		{
-			$database = DatabaseConnector::GetDatabase();
 			$returnUser = new User();
-			$data = $database->select("user", "*", array("username" => $userId));
+			$data = $this->database->select("user", "*", array("username" => $userId));
 			
 			$returnUser->userName = $data[0]["username"];
 			$returnUser->firstName = $data[0]["first_name"];
