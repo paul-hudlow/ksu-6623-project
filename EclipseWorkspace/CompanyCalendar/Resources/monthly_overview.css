@@ -1,6 +1,7 @@
 div.dayLabel {
 	text-align: center;
-	background-color: #ccddff;
+	background-color: #cccccc;
+	color: black;
 }
 
 td {
@@ -8,25 +9,24 @@ td {
 	max-width: 175px;
 	height: 125px;
 	border-style: solid;
-	border-width: 1px;
-	border-color: #999999;
+	border-width: 2px;
+	border-color: #777777;
 	padding: 0px;
 	vertical-align: top;
 }
 
 th {
 	border-style: solid;
-	border-width: 1px;
-	border-color: #999999;
+	border-width: 0;
+	border-color: #555555;
 	text-align: center;
-	background-color: #eeeeee;
 }
 
 table {
 	margin: 10px auto;
 	border-style: solid;
-	border-width: 1px;
-	border-color: #999999;
+	border-width: 0;
+	border-color: #555555;
 }
 
 ul.taskList {
@@ -34,9 +34,10 @@ ul.taskList {
 }
 
 ul.taskList  li {
-	background-color: #ff9999;
 	margin: 5px 5px 0px 5px;
 	padding: 0px 5px;
 	white-space: nowrap;
 	overflow: hidden;
+	font-size: small;
+	border-radius: 3pt;
 }

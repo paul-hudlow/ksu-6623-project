@@ -28,13 +28,64 @@
 			$this->database = DatabaseConnector::GetDatabase();
 		}
 		
-		function GetEventsForMonth($monthYear)
+		/*function GetEventsForMonthInclusive($month, $year)
 		{
 			$eventArray = array();
 			
-			//query database for all the events for given month
+ 			$monthStartString = $year . '-' . $month . '-1' . ' 00:00:00';
+			$totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+			$monthEndString = $year . '-' . $month . '-' . $totalDays . ' 23:59:59';
+			
+			$data = $this->database->select("event", "*", array("AND" => array("start_date[<=]" => $monthEndString, "end_date[>=]" => $monthStartString)));
+			$eventList = array();
+			foreach ($data as $datum)
+			{
+				$eventList[] = $this->MapEventFromData($datum);
+			}
+			return $eventList;
 			
 			return $eventArray;
+		}*/
+		
+		function GetEventsForMonth($year, $month, $categoryId, $employeeId)
+		{
+ 			$monthStartString = $year . '-' . $month . '-1' . ' 00:00:00';
+			$totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+			$monthEndString = $year . '-' . $month . '-' . $totalDays . ' 23:59:59';
+			
+			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+		}
+		
+		function GetEventsForYear($year, $categoryId, $employeeId)
+		{		
+ 			$yearStartString = $year . '-1-1' . ' 00:00:00';
+			$yearEndString = $year . '-12-31' . ' 23:59:59';
+			
+			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+		}
+		
+		function GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId)
+		{
+			$whereClause = array("start_date[>=]" => $yearStartString, "start_date[<=]" => $yearEndString);
+			
+			if ($categoryId != '')
+			{
+				$whereClause['category'] = $categoryId;
+			}
+			
+			if ($employeeId != '')
+			{
+				$whereClause['employee'] = $employeeId;
+			}
+			
+			$data = $this->database->select("event", "*", array("AND" => $whereClause, "ORDER" => array("start_date")));
+			
+			$eventList = array();
+			foreach ($data as $datum)
+			{
+				$eventList[] = $this->MapEventFromData($datum);
+			}
+			return $eventList;
 		}
 		
 		function GetEventByDayMonthYear($day, $monthYear)
@@ -55,9 +106,8 @@
 		
 		function GetEventsByDay($day, $month, $year)
 		{
- 			$dateTime = new DateTime($year . '/' . $month . '/' . $day);
-			$dayStart = $dateTime->format('Y-m-d') . ' 00:00:00';
-			$dayEnd = $dateTime->format('Y-m-d')  . ' 59:59:59';
+			$dayStart = $year . '-' . $month . '-' . $day . ' 00:00:00';
+			$dayEnd = $year . '-' . $month . '-' . $day . ' 23:59:59';
 			$data = $this->database->select("event", "*", array("AND" => array("start_date[<=]" => $dayEnd, "end_date[>=]" => $dayStart)));
 			$eventList = array();
 			foreach ($data as $datum)
@@ -74,9 +124,14 @@
 			$returnEvent->eventId = $data['id'];
 			$returnEvent->title = $data["title"];
 			$returnEvent->description = $data["description"];
-			$returnEvent->startDate = $data["start_date"];
-			$returnEvent->endDate = $data["end_date"];
-			$returnEvent->workTime = $data["work_time"];
+			$returnEvent->startDate = new DateTime($data["start_date"]);
+			$returnEvent->endDate = new DateTime($data["end_date"]);
+			if (isset($data["work_time"]))
+			{
+				$baseDateTime = new DateTime('00:00:00');
+				$workDateTime = new DateTime($data["work_time"]);
+				$returnEvent->workTime = $baseDateTime->diff($workDateTime);
+			}
 			$returnEvent->category = $this->eventCategoryDataAccessor->GetEventCategoryById($data["category"]);
 			if (!($data["employee"] == null || $data["employee"] == ""))
 			{

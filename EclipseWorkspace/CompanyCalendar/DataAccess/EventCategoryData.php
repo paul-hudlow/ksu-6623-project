@@ -6,7 +6,7 @@
 		public $id;
 		public $title;
 		public $includeHours;
-		public $colorCode;
+		public $color;
 	}
 	
 	class EventCategoryDataAccessor
