@@ -34,6 +34,8 @@
 				$emptyEvent = new Event();
 				$emptyEvent->employee = new User();
 				$emptyEvent->category = new EventCategory();
+				$emptyEvent->startDate = $year . "-" . $month . "-" . $day;
+				$emptyEvent->endDate = $year . "-" . $month . "-" . $day;
 				
 				$model["Event"] = $emptyEvent;
 			}
@@ -45,15 +47,27 @@
 		{
 			$event = new Event();
 			
+			$category = new EventCategory();
+			$category->id = $_GET['category'];
+			
+			$employee = new User();
+			$employee->userName = $_GET['employee'];
+			
+			$event->eventId     = $_GET['eventid'];
 			$event->title		= $_GET['title'];
 			$event->description = $_GET['description'];
-			$event->category	= $_GET['category'];
-			$event->employee	= $_GET['employee'];
-			$event->startDate	= $_GET['startDate'];
-		 	$event->endDate		= $_GET['endDate'];
-		 	$event->workTime	= $_GET['workTime'];
+			$event->category	= $category;
+			$event->employee	= $employee;
+			$event->startDate	= $_GET['start_date'];
+		 	$event->endDate		= $_GET['end_date'];
+		 	$event->workTime	= $_GET['hours_of_time'];
 			
 			return $this->eventData->SaveEvent($event);
+		}
+		
+		function DeleteEvent($eventId)
+		{
+			$this->eventData->DeleteEvent($eventId);
 		}
 	}
 ?>
