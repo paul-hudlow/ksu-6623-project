@@ -136,7 +136,7 @@ echo(var_export($model, true));
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="number" name="hours_of_time" value="<?php echo($model["Event"]->workTime) ?>" />
+                                <input type="number" name="hours_of_time" value="<?php echo($model["Event"]->workTime->h) ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                         
