@@ -103,7 +103,7 @@ echo(var_export($model, true));
                                     <?php $users = $model['Users']; ?>
                                     <?php foreach($users as $user){ echo("<!-- " . $user->userName . " = " . $model['Event']->employee->userName . " -->")?>
                                     <option value="<?php echo $user->userName;?>" <?php echo(($user->userName==$model['Event']->employee->userName?"SELECTED":""))?> >
-                                        <?php echo $user->firstName; ?> &nbsp; <?php echo $user->lastName; ?>
+                                        <?php echo($user->firstName . ' ' . $user->lastName); ?>
                                     </option>
                                     <?php } ?>
                                 </select>
