@@ -65,7 +65,17 @@
 		{
 			case "MONTHLY_OVERVIEW" :
 				$monthlyOverviewModule = new MonthlyOverViewModule();
-				$model = $monthlyOverviewModule->BuildModel($_GET['month'], $_GET['year']);
+				if (isset($_GET['month']) && isset($_GET['year']))
+				{
+					$month = $_GET['month'];
+					$year = $_GET['year'];
+				}
+				else
+				{
+					$month = date('m');
+					$year = date('Y');
+				}
+				$model = $monthlyOverviewModule->BuildModel($month, $year);
 				$template = "Views/MonthlyOverviewView.php";
 				break;
 				

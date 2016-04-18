@@ -4,10 +4,12 @@
 	class LoginModule
 	{
 		public $ulogin;
+		public $userDataAccessor;
 		
 		function __construct()
 		{
 			$this->ulogin = new uLogin();
+			$this->userDataAccessor = new UserDataAccessor();
 		}
 		
 		function BuildModel($failedAttempt)
@@ -25,9 +27,20 @@
 		{
 			$this->ulogin->Authenticate($username,  $password);
 			if ($this->ulogin->IsAuthSuccess()){
+				$user = $this->userDataAccessor->GetUserById($username);
+				if ($user->userName == $username)
+				{
+					$_SESSION['user'] = $user;
+				}
+				else
+				{
+					Logout();
+					return false;
+				}
+				
 				$_SESSION['uid'] = $this->ulogin->Uid();
-				$_SESSION['username'] = $username;
 				$_SESSION['loggedIn'] = true;
+				
 				return true;
 			}
 			else
@@ -40,7 +53,7 @@
 		{
 			$this->ulogin->Logout($_SESSION['uid']);
 			unset($_SESSION['uid']);
-			unset($_SESSION['username']);
+			unset($_SESSION['user']);
 			unset($_SESSION['loggedIn']);
 		}
 		

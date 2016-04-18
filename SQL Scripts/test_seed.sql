@@ -114,7 +114,8 @@ ALTER TABLE `event`
 INSERT INTO `user` (`username`, `first_name`, `last_name`, `role`, `active`) VALUES
 ('johnsmith', 'John', 'Smith', 0, 1),
 ('bobparr', 'Bob', 'Parr', 0, 1),
-('ronpaul', 'Ron', 'Paul', 0, 1);
+('ronpaul', 'Ron', 'Paul', 0, 1),
+('admin', 'Patrick', 'Stewart', 1, 1);
 
 --
 -- Dumping data for table `category`

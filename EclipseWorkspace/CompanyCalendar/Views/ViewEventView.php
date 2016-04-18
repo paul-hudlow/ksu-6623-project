@@ -20,7 +20,7 @@
 	    <div class="row" id="title-row">
                 
 		<div class="five columns">
-                    <h5>View Event</h5>
+                    <h5><?php echo($model['event_title']); ?></h5>
                 </div><!-- .five .columns  -->
                 
                 <div class="six columns" id="right_side_title">
@@ -35,24 +35,14 @@
             
             <div class="row" id="form_row">
                 <div class="u-full-width">
-                        
-                        <div class="row" id="event_type_row">                            
-                            <div class="three columns">
-                                <b>Event Title: </b>
-                            </div> <!-- three columns -->
-                            
-                            <div class="seven columns">
-                                <input type="text" name="event_title" value="<?php echo $model['event_title']; ?>" />
-                            </div> <!-- seven columns -->
-                        </div> <!-- #event_type_row -->
-                        
+                
                         <div class="row" id="event_description_row">
                             <div class="three columns">
                                 <b>Event Description: </b>
                             </div><!--  .three .columns  -->
                             
                             <div class="seven columns">
-                                <textarea class= "u-full-width" name="event_description" cols=30><?php echo trim($model['event_description']); ?></textarea>
+                                <span><?php echo trim($model['event_description']); ?></span>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_description_row  -->
                         
