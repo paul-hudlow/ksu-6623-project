@@ -117,12 +117,15 @@
 					else if (strtoupper($action) == "DELETE")
 					{
 						//case 5
+						$eventModel->DeleteEvent($_GET["eventid"]);
 					}
-						
+					
+					die('<script type="text/javascript">window.location.href="index.php?page=monthly_overview&year=' . $_GET['year']  . '&month=' . $_GET['month'] . '";</script>');
+					
 					// always return to the overview
-					$monthlyOverviewModule = new MonthlyOverViewModule();
-					$model = $monthlyOverviewModule->BuildModel($_GET['month'], $_GET['year']);
-					$template = "Views/MonthlyOverviewView.php";
+					//$monthlyOverviewModule = new MonthlyOverViewModule();
+					//$model = $monthlyOverviewModule->BuildModel($_GET['month'], $_GET['year']);
+					//$template = "Views/MonthlyOverviewView.php";
 				}				
 				
 				break;

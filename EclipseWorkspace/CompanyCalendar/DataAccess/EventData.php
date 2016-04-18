@@ -126,9 +126,36 @@
 		{
 			$retVal = false;
 			
-			//query to save the event information
+			$dataArray = array(
+					"id" => $event->eventId,
+					"title" => $event->title,
+					"description" => $event->description,
+					"start_date" => $event->startDate,
+					"end_date" => $event->endDate,
+					"category" => $event->category->id,
+					"employee" => $event->employee->userName,
+					"work_time" => $event->workTime,
+			);
+			
+			if ($event->eventId != NULL)
+			{
+				//update
+				$this->database->update("event", $dataArray, ["id" => $event->eventId]);
+			}
+			else
+			{
+				//insert
+				$max = $this->database->max("event", "id");
+				$dataArray['id'] = $max + 1;
+				$this->database->insert("event", $dataArray);
+			}
 			
 			return $retVal;
+		}
+		
+		function DeleteEvent($eventId)
+		{
+			$this->database->delete("event", ["id" => $eventId]);
 		}
 	}
 ?>
