@@ -34,6 +34,7 @@ echo(var_export($model, true));
 
                 document.getElementById("hours_of_time").style.display = display;
             }
+
         </script>
     </head>
     
@@ -99,7 +100,7 @@ echo(var_export($model, true));
                             
                             <div class="seven columns">
                                 <select name="employee">
-                                    <option>Employee</option>
+                                	<option></option>
                                     <?php $users = $model['Users']; ?>
                                     <?php foreach($users as $user){ echo("<!-- " . $user->userName . " = " . $model['Event']->employee->userName . " -->")?>
                                     <option value="<?php echo $user->userName;?>" <?php echo(($user->userName==$model['Event']->employee->userName?"SELECTED":""))?> >
@@ -137,7 +138,6 @@ echo(var_export($model, true));
                             
                             <div class="seven columns">
                                 <select id="category" name="category" onchange="displayWorkTime();" >
-                                    <option>Event</option>
                                     <?php $categories = $model['Categories']; ?>
                                     <?php foreach($categories as $category){ echo("<!-- " . $category->id . " = " . $model['Event']->category->id . " -->") ?>
                                     <option value="<?php echo $category->id; ?>" <?php echo(($category->id==$model['Event']->category->id?"SELECTED":"")) ?> >
@@ -158,7 +158,7 @@ echo(var_export($model, true));
                             </div><!-- .seven .columns  -->
                         </div><!--  #hours_of_time -->
                         
-                        <input type="hidden" name="eventid" value="<?php echo($model['Event']->eventId) ?>" />
+                        <input type="hidden" name="event_id" value="<?php echo($model['Event']->eventId) ?>" />
                         <input type="hidden" id="action" name="action" />
                         <input type="hidden" name="page" value="ADD_EDIT_EVENT" />
                         <input type="hidden" name="year" value="<?php echo($model['year'])?>" />
