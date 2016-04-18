@@ -53,7 +53,7 @@
 			$employee = new User();
 			$employee->userName = $_GET['employee'];
 			
-			$event->eventId     = $_GET['eventid'];
+			$event->eventId     = $_GET['event_id'];
 			$event->title		= $_GET['title'];
 			$event->description = $_GET['description'];
 			$event->category	= $category;
