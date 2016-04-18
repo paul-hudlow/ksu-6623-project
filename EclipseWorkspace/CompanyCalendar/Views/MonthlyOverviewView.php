@@ -69,7 +69,7 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
                     		<?php for ($day = 0; $day < 7; $day++) { ?>
                     		<td>
                     		<?php if ($model['days'][$week][$day]->dayOfMonth != '') { ?>
-                    			<a class="normal" href="<?php echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&day=" . $model['days'][$week][$day]->dayOfMonth); ?>" >
+                    			<a class="normal" href="<?php if ($_SESSION['HR']) { echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&day=" . $model['days'][$week][$day]->dayOfMonth); } ?>" >
                     		    <div class="dayLabel">
 								<?php echo($model['days'][$week][$day]->dayOfMonth); ?>
                     			</div>
@@ -77,7 +77,7 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
                     		<?php } ?>
                     			<ul class="taskList">
                     				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
-                    					<a class="normal" href="<?php echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&eventid=" . $event->eventId); ?>" >
+                    					<a class="normal" href="<?php echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&event_id=" . $event->eventId); ?>" >
                     				    	<li style="background-color: <?php echo($event->category->color); ?>"><?php echo($event->title); ?></li>
                     					</a>
                     				<?php } ?>

@@ -94,14 +94,20 @@
 				
 				$eventModel = new AddEditEventModule();
 
+				if (!$_SESSION['HR'])
+				{
+					header('Location: ' . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?page=view_event&event_id=' . $_GET["event_id"]);
+					die();
+				}
+				
 				if (strtoupper($action) == "")
 				{
 					error_log("ADD_EDIT_EVENT: display");
 					
-					if(isset($_GET["eventid"]))
+					if(isset($_GET["event_id"]))
 					{
 						//case 2
-						$model = $eventModel->BuildModel($_GET["year"], $_GET["month"], NULL, $_GET["eventid"]);
+						$model = $eventModel->BuildModel($_GET["year"], $_GET["month"], NULL, $_GET["event_id"]);
 					}
 					else 
 					{
@@ -127,7 +133,7 @@
 					else if (strtoupper($action) == "DELETE")
 					{
 						//case 5
-						$eventModel->DeleteEvent($_GET["eventid"]);
+						$eventModel->DeleteEvent($_GET["event_id"]);
 					}
 					
 					die('<script type="text/javascript">window.location.href="index.php?page=monthly_overview&year=' . $_GET['year']  . '&month=' . $_GET['month'] . '";</script>');

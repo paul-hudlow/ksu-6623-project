@@ -18,8 +18,14 @@
 			$model["event_start_date"] = $eventObject->startDate->format('h:ia F d, Y');
 			$model["event_end_date"] = $eventObject->endDate->format('h:ia F d, Y');
 			$model["event_category"] = $eventObject->category->title;
-			$model["employee"] = $eventObject->employee->firstName . ' ' . $eventObject->employee->lastName;
-			$model["work_time"] = $eventObject->workTime->format('%h:%i');
+			if (isset($eventObject->employee))
+			{
+				$model["employee"] = $eventObject->employee->firstName . ' ' . $eventObject->employee->lastName;
+			}
+			if (isset($eventObject->workTime))
+			{
+				$model["work_time"] = $eventObject->workTime->format('%h:%i');
+			}
 			
 			return $model;
 		}

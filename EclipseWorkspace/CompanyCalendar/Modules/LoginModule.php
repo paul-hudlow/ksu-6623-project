@@ -30,7 +30,7 @@
 				$user = $this->userDataAccessor->GetUserById($username);
 				if ($user->userName == $username)
 				{
-					$_SESSION['user'] = $user;
+					$_SESSION['HR'] = $user->isHR;
 				}
 				else
 				{
@@ -53,7 +53,7 @@
 		{
 			$this->ulogin->Logout($_SESSION['uid']);
 			unset($_SESSION['uid']);
-			unset($_SESSION['user']);
+			unset($_SESSION['HR']);
 			unset($_SESSION['loggedIn']);
 		}
 		
@@ -79,7 +79,7 @@
 		
 		static function LoggedIn()
 		{
-			return isset($_SESSION['uid']) && isset($_SESSION['username']) && isset($_SESSION['loggedIn']) && ($_SESSION['loggedIn']===true);
+			return isset($_SESSION['uid']) && isset($_SESSION['loggedIn']) && ($_SESSION['loggedIn']===true);
 		}
 	}
 ?>
