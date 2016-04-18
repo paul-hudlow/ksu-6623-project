@@ -34,8 +34,8 @@
 				$emptyEvent = new Event();
 				$emptyEvent->employee = new User();
 				$emptyEvent->category = new EventCategory();
-				$emptyEvent->startDate = $year . "-" . $month . "-" . $day;
-				$emptyEvent->endDate = $year . "-" . $month . "-" . $day;
+				$emptyEvent->startDate = new DateTime($year . "-" . $month . "-" . $day);
+				$emptyEvent->endDate = new DateTime($year . "-" . $month . "-" . $day);
 				
 				$model["Event"] = $emptyEvent;
 			}
@@ -60,7 +60,9 @@
 			$event->employee	= $employee;
 			$event->startDate	= $_GET['start_date'];
 		 	$event->endDate		= $_GET['end_date'];
-		 	$event->workTime	= $_GET['hours_of_time'];
+		 	
+		 	$event->workTime	= new DateInterval("PT1H");
+		 	$event->workTime->h = $_GET['hours_of_time'];
 			
 			return $this->eventData->SaveEvent($event);
 		}

@@ -134,7 +134,7 @@
 					"end_date" => $event->endDate,
 					"category" => $event->category->id,
 					"employee" => $event->employee->userName,
-					"work_time" => $event->workTime,
+					"work_time" => $event->workTime->format("%H:%M:%S"),
 			);
 			
 			if ($event->eventId != NULL)
