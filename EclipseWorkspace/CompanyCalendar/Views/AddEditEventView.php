@@ -60,7 +60,7 @@ echo(var_export($model, true));
                             </div> <!-- three columns -->
                             
                             <div class="seven columns">
-                                <input type="text" name="event_title" placeholder="Event Title" value="<?php echo($model["Event"]->title) ?>"/>
+                                <input type="text" name="title" placeholder="Event Title" value="<?php echo($model["Event"]->title) ?>"/>
                             </div> <!-- seven columns -->
                         </div> <!-- #event_type_row -->
                         
@@ -70,7 +70,7 @@ echo(var_export($model, true));
                             </div><!--  .three .columns  -->
                             
                             <div class="seven columns">
-                                <textarea class="u-full-width" name="event_description" cols=30><?php echo($model["Event"]->description) ?></textarea>
+                                <textarea class="u-full-width" name="description" cols=30><?php echo($model["Event"]->description) ?></textarea>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_description_row  -->
                         
@@ -149,7 +149,7 @@ echo(var_export($model, true));
                         <div class="row" id="button_row">
                             <div class="u-full-width" id="button_div">
                                 <input type="submit" value="Save" onClick="document.getElementById('action').value='Save';" />
-                                <input type="reset" value="Cancel" onClick="document.getElementById('action').value='Cancel';" />
+                                <!-- <input type="reset" value="Cancel" onClick="document.getElementById('action').value='Cancel';" /> -->
                             </div>
                         </div><!--  #button_row  -->
                         
