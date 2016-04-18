@@ -45,10 +45,9 @@
                             <div class="seven columns">
                                 <select name="employee">
                                     <option value="">All</option>
-                                    <?php $users = $model['employeeList']; ?>
-                                    <?php foreach($users as $user){ ?>
-                                    <option value="<?php echo $user->id; ?>">
-                                        <?php echo ($user['firstname'] . ' ' .$user['lastname']); ?>
+                                    <?php foreach($model['employees'] as $user){ ?>
+                                    <option value="<?php echo($user->userName); ?>" <?php if ($user->userName == $model['selectedEmployee']) { echo('selected="selected"'); } ?>>
+                                        <?php echo ($user->firstName . ' ' . $user->lastName); ?>
                                     </option>
                                     <?php } ?>
                                 </select>
@@ -63,8 +62,8 @@
                             <div class="seven columns">
                                 <select name="category">
                                     <option value="">All</option>
-                                    <?php foreach($model['categoryList'] as $category){ ?>
-                                    <option value="<?php echo $category->id; ?>">
+                                    <?php foreach($model['categories'] as $category){ ?>
+                                    <option value="<?php echo($category->id); ?>" <?php if ($category->id == $model['selectedCategory']) { echo('selected="selected"'); } ?> >
                                         <?php echo($category->title); ?>
                                     </option>
                                     <?php } ?>
@@ -78,20 +77,11 @@
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <select name="category">
+                                <select name="month">
                                     <option value="">All</option>
-                                    <option value="0">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                    <option value="4">May</option>
-                                    <option value="5">June</option>
-                                    <option value="6">July</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">October</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
+                                    <?php foreach ($model['allMonths'] as $number => $name) { ?>
+                                    <option value="<?php echo($number); ?>" <?php if ($number == $model['selectedMonth']) { echo('selected="selected"'); } ?> ><?php echo($name); ?></option>
+                                    <?php } ?>
                                 </select>
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_category_row -->
@@ -102,7 +92,7 @@
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <input type="number" name="year" min="2000" max="2016" step="1" value="2016">
+                                <input type="number" name="year" min="1970" max="<?php echo($model['currentYear'] + 1) ?>" step="1" value="<?php echo($model['currentYear']) ?>">
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_category_row -->
                         
@@ -120,7 +110,7 @@
 			<hr/>
 
 			<table>
-				<?php if (isset($model['monthlyTime'])){ ?>
+				<?php if ($model['period'] == 'year'){ ?>
 					<tr>
 						<th>Month</th><th>Time (Hours)</th>
 					</tr>
@@ -134,15 +124,18 @@
 					</tr>
 				<?php } else { ?>
 					<tr>
-						<th>Event</th><th>Date</th><th>Time (Hours)</th>
+						<th>Event</th><th>Date</th><th>Employee</th><th>Time (Hours)</th>
 					</tr>
 					<?php foreach ($model['events'] as $event) { ?>
 					<tr>
-						<td><?php echo($event->title) ?></td><td><?php echo($event->startDate.format('d')) ?></td><td><?php echo($event->workTime) ?></td>
+						<td><?php echo($event->title); ?></td>
+						<td><?php echo($event->startDate->format('d')); ?></td>
+						<td><?php echo($event->employee->firstName . ' ' . $event->employee->lastName); ?></td>
+						<td><?php echo($event->workTime); ?></td>
 					</tr>
 					<?php } ?>
 					<tr class="summary">
-						<td>All</td><td></td><td><?php echo($model['totalTime']) ?></td>
+						<td>All</td><td></td><td></td><td><?php echo($model['totalTime']) ?></td>
 					</tr>
 				<?php } ?>
 			</table>

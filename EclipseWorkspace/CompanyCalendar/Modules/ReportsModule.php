@@ -20,19 +20,37 @@
 		{
 			if (empty($month))
 			{
-				$this->BuildModelForYear($year, $employeeId, $categoryId);
+				$newModel = $this->BuildModelForYear($year, $employeeId, $categoryId);
+				$newModel['period'] = 'year';
 			}
 			else
 			{
-				$this->BuildModelForMonth($year, $month, $employeeId, $categoryId);
+				$newModel = $this->BuildModelForMonth($year, $month, $employeeId, $categoryId);
+				$newModel['period'] = 'month';
 			}
+			$newModel['categories'] = $this->eventCategoryDataAccessor->GetAllCategories();
+			$newModel['employees'] = $this->userDataAccessor->GetAllUsers();
+			$newModel['currentYear'] = date('Y');
+		
+			$newModel['selectedYear'] = $year;
+			$newModel['selectedMonth'] = $month;
+			$newModel['selectedEmployee'] = $employeeId;
+			$newModel['selectedCategory'] = $categoryId;
+			
+			for ($i = 1; $i <= 12; $i++)
+			{
+				$monthDateTime = new DateTime("2000-$i-01");
+				$newModel['allMonths'][$i] = $monthDateTime->format('F');
+			}
+			
+			return $newModel;
 		}
 		
 		function BuildModelForYear($year, $employeeId, $categoryId)
 		{
 			$model = array();
 			
-			$allEvents = $this->eventDataAccessor->GetEventsForYear($year, $categoryId, $employeeId);
+			$allEvents = $this->eventDataAccessor->GetEventsForYear($year, $employeeId, $categoryId);
 			$monthlyEvents = $this->DivideMonths($allEvents);
 			
 			foreach ($monthlyEvents as $monthName=>$monthEvents)
@@ -53,17 +71,18 @@
 			$model = array();
 			
 			$allEvents = $this->eventDataAccessor->GetEventsForMonth($year, $month, $employeeId, $categoryId);
+
+			$model['totalTime'] = $this->CountWorkTime($allEvents);
 			
 			foreach ($allEvents as $event)
 			{
-				$workTime = GetWorkTimeInHours($event);
+				$workTime = $this->GetWorkTimeInHours($event);
 				if ($workTime > 0)
 				{
+					$event->workTime = $workTime; // Update event object with string instead of DateInterval.
 					$model['events'][] = $event;
 				}
 			}
-
-			$model['totalTime'] = $this->CountWorkTime($allEvents);
 			
 			return $model;
 		}
@@ -84,7 +103,7 @@
 			
 			foreach ($eventList as $event)
 			{
-				$totalTime += GetWorkTimeInHours($event);
+				$totalTime += $this->GetWorkTimeInHours($event);
 			}
 			return $totalTime;
 		}

@@ -28,52 +28,33 @@
 			$this->database = DatabaseConnector::GetDatabase();
 		}
 		
-		/*function GetEventsForMonthInclusive($month, $year)
-		{
-			$eventArray = array();
-			
- 			$monthStartString = $year . '-' . $month . '-1' . ' 00:00:00';
-			$totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-			$monthEndString = $year . '-' . $month . '-' . $totalDays . ' 23:59:59';
-			
-			$data = $this->database->select("event", "*", array("AND" => array("start_date[<=]" => $monthEndString, "end_date[>=]" => $monthStartString)));
-			$eventList = array();
-			foreach ($data as $datum)
-			{
-				$eventList[] = $this->MapEventFromData($datum);
-			}
-			return $eventList;
-			
-			return $eventArray;
-		}*/
-		
-		function GetEventsForMonth($year, $month, $categoryId, $employeeId)
+		function GetEventsForMonth($year, $month, $employeeId, $categoryId)
 		{
  			$monthStartString = $year . '-' . $month . '-1' . ' 00:00:00';
 			$totalDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 			$monthEndString = $year . '-' . $month . '-' . $totalDays . ' 23:59:59';
 			
-			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+			return $this->GetEventsForTimePeriod($monthStartString, $monthEndString, $employeeId, $categoryId);
 		}
 		
-		function GetEventsForYear($year, $categoryId, $employeeId)
+		function GetEventsForYear($year, $employeeId, $categoryId)
 		{		
  			$yearStartString = $year . '-1-1' . ' 00:00:00';
 			$yearEndString = $year . '-12-31' . ' 23:59:59';
 			
-			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId);
+			return $this->GetEventsForTimePeriod($yearStartString, $yearEndString, $employeeId, $categoryId);
 		}
 		
-		function GetEventsForTimePeriod($yearStartString, $yearEndString, $categoryId, $employeeId)
+		function GetEventsForTimePeriod($yearStartString, $yearEndString, $employeeId, $categoryId)
 		{
 			$whereClause = array("start_date[>=]" => $yearStartString, "start_date[<=]" => $yearEndString);
 			
-			if ($categoryId != '')
+			if (!empty($categoryId))
 			{
 				$whereClause['category'] = $categoryId;
 			}
 			
-			if ($employeeId != '')
+			if (!empty($employeeId))
 			{
 				$whereClause['employee'] = $employeeId;
 			}
