@@ -137,6 +137,11 @@
 					"work_time" => $event->workTime->format("%H:%M:%S"),
 			);
 			
+			if ($dataArray["employee"] == "")
+			{
+				$dataArray["employee"] = NULL;
+			}
+			
 			if ($event->eventId != NULL)
 			{
 				//update
