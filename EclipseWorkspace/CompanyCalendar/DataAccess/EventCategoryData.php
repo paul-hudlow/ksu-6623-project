@@ -43,7 +43,7 @@
 				
 				$curCat->id				= $row["id"];
 				$curCat->colorCode		= $row["color"];
-				$curCat->includeHours	= "";
+				$curCat->includeHours	= $row["work_time"];
 				$curCat->title			= $row["title"];
 				
 				$allCategories[] = $curCat;

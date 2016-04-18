@@ -16,6 +16,24 @@ echo(var_export($model, true));
                     window.location.replace('index.php?page=monthly_overview<?php echo("&year=" . $model['year'] . "&month=" . $model['month'])?>');
                 });
             });
+
+            var categories = [<?php foreach($model["Categories"] as $cat) { echo("{'id':" . $cat->id . ", 'includeHour':" . $cat->includeHours . "},"); } ?>];
+            
+            function displayWorkTime()
+            {
+                var curCatId = document.getElementById("category").value;
+                var display = "none";
+
+                for(var i=0; i<categories.length; i++)
+                {
+                    if (curCatId == categories[i].id && categories[i].includeHour == 1)
+                    {
+                        display = "inline";
+                    }
+                }
+
+                document.getElementById("hours_of_time").style.display = display;
+            }
         </script>
     </head>
     
@@ -118,7 +136,7 @@ echo(var_export($model, true));
                             </div><!-- .three .columns -->
                             
                             <div class="seven columns">
-                                <select name="category">
+                                <select id="category" name="category" onchange="displayWorkTime();" >
                                     <option>Event</option>
                                     <?php $categories = $model['Categories']; ?>
                                     <?php foreach($categories as $category){ echo("<!-- " . $category->id . " = " . $model['Event']->category->id . " -->") ?>
@@ -130,7 +148,7 @@ echo(var_export($model, true));
                             </div><!-- .seven .columns  -->
                         </div><!-- #event_category_row -->
                         
-                        <div class="row" id="hours_of_time">
+                        <div class="row" id="hours_of_time" style="display:<?php echo(($model['Event']->category->includeHours == 1?'inline':'none')) ?>">
                             <div class="three columns">
                                 <b>Hours of work time:</b>
                             </div><!-- .three .columns  -->
