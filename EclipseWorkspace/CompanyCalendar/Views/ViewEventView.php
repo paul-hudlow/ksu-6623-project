@@ -15,6 +15,7 @@
     
     
     <body>
+    <?php include("Resources/HeaderSnippet.php"); ?>
 	<div id="view_event">
 	    <div class="row" id="title-row">
                 

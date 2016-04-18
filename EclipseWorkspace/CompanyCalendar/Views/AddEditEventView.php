@@ -98,7 +98,7 @@ echo(var_export($model, true));
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="start_date" value="<?php echo((new DateTime($model["Event"]->startDate))->format("Y-m-d")) ?>"/>
+                                <input type="date" name="start_date" value="<?php echo($model["Event"]->startDate->format("Y-m-d")) ?>"/>
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_start_date  -->
                         
@@ -108,7 +108,7 @@ echo(var_export($model, true));
                             </div><!-- .three .columns  -->
                             
                             <div class="seven columns">
-                                <input type="date" name="end_date" value="<?php echo((new DateTime($model["Event"]->endDate))->format("Y-m-d")) ?>" />
+                                <input type="date" name="end_date" value="<?php echo($model["Event"]->endDate->format("Y-m-d")) ?>" />
                             </div><!-- .seven .columns  -->
                         </div><!--  #event_end_date  -->
                         

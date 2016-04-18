@@ -131,8 +131,14 @@
 				break;
 				
 			case "REPORTS" :
-				$model = ReportsModule::BuildModel();
+				$reportsModule = new ReportsModule();
+				$model = $reportsModule->BuildModel($_GET['year'], $_GET['month'], $_GET['employee'], $_GET['category']);
 				$template = "Views/ReportsView.php";
+				break;
+			
+			case "REPORT_SUMMARY" :
+				//$model = ReportsModule::BuildModel();
+				$template = "Views/ReportSummary.php";
 				break;
 				
 			default:

@@ -13,12 +13,7 @@
     text-align: center;
 }
 
-#logout_box {
-	margin: 5px;
-	float: right;
-}
-
-#event_form, #view_event{
+#event_form, #view_event, #reports{
     margin: 0 auto;
     width: 50%;
     text-align: left;
@@ -62,10 +57,6 @@ hr, h5{
     height: 1px;
     position: relative;
     top:10px;
-}
-
-#button_div{
-    text-align: right;
 }
 
 #button_div input{
@@ -132,4 +123,29 @@ hr, h5{
 
 #count_up{
     float: right;
+}
+
+.details{
+    border: 1px solid #808080;
+    text-align: center;
+    margin: 0;
+    height: 70px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.month_title{
+    border-bottom: 1px solid #808080;
+}
+
+.hours_value{
+    font-weight: bold;
+    background-color: #C0C0C0;
+    height: 100%;
+    font-size: 24px;
+    padding: 3px 0;
+}
+
+tr.summary {
+	font-weight: bold;
 }

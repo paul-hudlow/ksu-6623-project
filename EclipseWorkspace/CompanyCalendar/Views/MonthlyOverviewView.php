@@ -170,6 +170,7 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
     
     
     <body>
+    <?php include("Resources/HeaderSnippet.php"); ?>
 	<div id="view_calendar">
             
             <div class="row" id="event_type_row">
@@ -216,9 +217,9 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
                     			</div>
                     			<ul class="taskList">
                     				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
-                    				<li><?php echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
-                    				          echo("&eventid=" . $event->eventId . "\" >");
-                    				          echo($event->title . "</a>"); ?></li>
+                    				<li style="background-color: <?php echo($event->category->color) ?>"><?php echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
+                    				    	echo("&eventid=" . $event->eventId . "\" >");
+                    				    	echo($event->title . "</a>"); ?></li>
                     				<?php } ?>
                     			</ul>
                     		</td>
