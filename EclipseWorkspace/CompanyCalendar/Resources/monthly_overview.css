@@ -41,3 +41,8 @@ ul.taskList  li {
 	font-size: small;
 	border-radius: 3pt;
 }
+
+a.normal {
+	text-decoration:none;
+	color: black;
+}

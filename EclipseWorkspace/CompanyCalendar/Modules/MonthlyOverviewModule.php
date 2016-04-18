@@ -54,6 +54,25 @@
 					$dayOfWeek = 0;
 				}
 			}
+			
+			$model['currentYear'] = $year;
+			
+			$model['nextMonth'] = $month + 1;
+			$model['previousMonth'] = $month - 1;
+			$model['nextYear'] = $year;
+			$model['previousYear'] = $year;
+			
+			if ($month == 12)
+			{
+				$model['nextMonth'] = 1;
+				$model['nextYear'] = $year + 1;
+			}
+			else if ($month == 1)
+			{
+				$model['previousMonth'] = 12;
+				$model['previousYear'] = $year - 1;
+			}
+			
 			return $model;
 		}
 	}

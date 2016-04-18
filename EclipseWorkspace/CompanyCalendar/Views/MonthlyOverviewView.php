@@ -1,116 +1,5 @@
 <?php
 
-/*$model = array();
-$model['event_types'] = array(
-        array(
-            'id' => 1,
-            'types' => 'Employee Birthday',
-            'color' => '#ff5733'
-        ),
-        
-        array(
-            'id' => 2,
-            'types' => 'Anniversary',
-            'color' => '#004d99'
-        ),
-        
-        array(
-            'id' => 3,
-            'types' => 'Company Events',
-            'color' => '#00ff00'
-        ),
-        
-        array(
-            'id' => 4,
-            'types' => 'Company Holidays',
-            'color' => '#ff0000'
-        ),
-        
-        array(
-            'id' => 5,
-            'types' => 'Out Of Office',
-            'color' => '#996633'
-        ),
-        
-        array(
-            'id' => 6,
-            'types' => 'Vacation',
-            'color' => '#666699'
-        ),
-        
-        array(
-            'id' => 7,
-            'types' => 'Training',
-            'color' => '#ff9900'
-        ),
-        
-        array(
-            'id' => 8,
-            'types' => 'Visitor',
-            'color' => '#00ffcc'
-        ),
-        
-        array(
-            'id' => 9,
-            'types' => 'Sick Days',
-            'color' => '#660033'
-        )
-        
-);
-
-$model['event_list'] = array(
-    array(
-        'id' => 5,
-        'user_id' => 5,
-        'start_date' =>'2016-03-10',
-        'end_date' =>'2016-03-15',
-        'type' => 5,
-        'description' => 'Out of Town',
-        'title' => 'Out Of Office' ,
-        'color' => '#996633'
-    ),
-    array(
-        'id' => 10,
-        'user_id' => 6, 
-        'start_date' =>'2016-05-11',
-        'end_date' =>'2016-05-15',
-        'type' => 3,
-        'description' => 'Mid Day Bowling',
-        'title' => 'Company Events' ,
-        'color' => '#00ff00'
-    ),
-    array(
-        'id' => 15,
-        'user_id' => 7, 
-        'start_date' =>'2016-04-12',
-        'end_date' =>'2016-04-14',
-        'type' => 4,
-        'description' => 'Company Retreat',
-        'title' => 'Company Holidays' ,
-        'color' => '#ff0000'
-    ),
-    array(
-        'id' => 20,
-        'user_id' => 8, 
-        'start_date' =>'2016-04-12',
-        'end_date' =>'2016-04-14',
-        'type' => 7,
-        'description' => 'Training',
-        'title' => 'Training Day' ,
-        'color' => '#ff4400'
-    ),
-    array(
-        'id' => 25,
-        'user_id' => 9,
-        'start_date' =>'2016-04-02',
-        'end_date' =>'2016-04-05',
-        'type' => 2,
-        'description' => 'New Year Celebrate',
-        'title' => 'Anniversary' ,
-        'color' => '#004d99'
-    )
-);*/
-
 $number_of_events = sizeof($model['event_list']);
 
 if(!@$_GET['month']){
@@ -136,36 +25,6 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
         <link rel="stylesheet" href="Resources/style.css" />
         <link rel="stylesheet" href="Resources/monthly_overview.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                calendar_transition();
-                
-                function calendar_transition(){
-                    var current_month_value = $("#month_type_row h3").attr("id");
-                    var url = "index.php?page=monthly_overview";
-                    $("#count_down").click(function(){
-                        if(current_month_value > 1){
-                            current_month_value--;
-                        }
-                        else {
-                            current_month_value = 12;
-                        }
-                        $(location).attr('href',url+'&month='+current_month_value);
-                    });
-                    
-                    $("#count_up").click(function(){
-                        if(current_month_value < 12){
-                            current_month_value++;
-                        }
-                        else {
-                            current_month_value = 1;
-                        }
-                        $(location).attr('href',url+'&month='+current_month_value);
-                    });
-                }
-                
-            });
-        </script>
     </head>
     
     
@@ -185,7 +44,11 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
                 
             <div class="row" id="month_type_row">
                 <div class="u-full-width">
-                    <h3 id="<?php echo $current_number_month; ?>"> <span class="month_cycle" id="count_down"> < </span>  &nbsp;  <?php echo $current_Text_Month; ?>  &nbsp;  <span class="month_cycle" id="count_up"> > </span> </h3>
+                    <h3 id="<?php echo $current_number_month; ?>">
+                    	<a class="normal" href="<?php echo('?page=monthly_overview&year=' . $model['previousYear'] . '&month=' . $model['previousMonth']); ?>"><span class="month_cycle" id="count_down"> &lt; </span></a>
+                    	<?php echo($current_Text_Month . ' ' . $model['currentYear']); ?>
+                    	<a class="normal" href="<?php echo('?page=monthly_overview&year=' . $model['nextYear'] . '&month=' . $model['nextMonth']); ?>"><span class="month_cycle" id="count_up"> &gt; </span></a>
+                	</h3>
                 </div>
             </div>
             
@@ -205,21 +68,18 @@ $addeditmonthyearURLpart = "month=" . $current_number_month . "&year=" . $curren
                     	<tr>
                     		<?php for ($day = 0; $day < 7; $day++) { ?>
                     		<td>
-                    			<div class="dayLabel">
-                    			<?php 
-                    				if ($model['days'][$week][$day]->dayOfMonth != '')
-                    				{
-                    				    echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
-                    				    echo("&day=" . $model['days'][$week][$day]->dayOfMonth . "\">"); 
-                    				    echo($model['days'][$week][$day]->dayOfMonth . "</a>");
-                    				}
-                    			?>
+                    		<?php if ($model['days'][$week][$day]->dayOfMonth != '') { ?>
+                    			<a class="normal" href="<?php echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&day=" . $model['days'][$week][$day]->dayOfMonth); ?>" >
+                    		    <div class="dayLabel">
+								<?php echo($model['days'][$week][$day]->dayOfMonth); ?>
                     			</div>
+                    		    </a>
+                    		<?php } ?>
                     			<ul class="taskList">
                     				<?php foreach ($model['days'][$week][$day]->eventList as $event) { ?>
-                    				<li style="background-color: <?php echo($event->category->color) ?>"><?php echo("<a href=\"index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart);
-                    				    	echo("&eventid=" . $event->eventId . "\" >");
-                    				    	echo($event->title . "</a>"); ?></li>
+                    					<a class="normal" href="<?php echo("index.php?page=ADD_EDIT_EVENT&" . $addeditmonthyearURLpart . "&event_id=" . $event->eventId); ?>" >
+                    				    	<li style="background-color: <?php echo($event->category->color); ?>"><?php echo($event->title); ?></li>
+                    					</a>
                     				<?php } ?>
                     			</ul>
                     		</td>
